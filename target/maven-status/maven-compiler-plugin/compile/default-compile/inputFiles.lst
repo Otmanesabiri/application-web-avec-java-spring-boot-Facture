@@ -1,0 +1,14 @@
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/ExerciceApplication.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/config/SwaggerConfig.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/controller/ClientController.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/controller/FactureController.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/dto/ClientDTO.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/dto/FactureDTO.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/dto/LigneFactureDTO.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/entity/Client.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/entity/Facture.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/entity/LigneFacture.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/repository/ClientRepository.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/repository/FactureRepository.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/service/ClientService.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/service/FactureService.java

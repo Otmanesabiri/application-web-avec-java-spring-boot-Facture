@@ -1,5 +1,6 @@
 package com.facture.exercice.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -10,23 +11,34 @@ import java.util.List;
 /**
  * DTO pour la création et l'affichage des factures
  */
+@Schema(description = "Objet représentant une facture avec ses lignes et totaux calculés")
 public class FactureDTO {
     
+    @Schema(description = "Identifiant unique de la facture", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
     
     @NotNull(message = "L'ID du client est obligatoire")
+    @Schema(description = "Identifiant du client associé à la facture", example = "1", required = true)
     private Long clientId;
     
+    @Schema(description = "Nom du client (calculé automatiquement)", example = "Entreprise ACME", accessMode = Schema.AccessMode.READ_ONLY)
     private String clientNom;
     
+    @Schema(description = "Date de création de la facture", example = "2025-06-18", type = "string", format = "date")
     private LocalDate date;
     
     @NotEmpty(message = "Une facture doit avoir au moins une ligne")
     @Valid
+    @Schema(description = "Liste des lignes de facturation", required = true)
     private List<LigneFactureDTO> lignes;
     
+    @Schema(description = "Total hors taxes (calculé automatiquement)", example = "100.00", accessMode = Schema.AccessMode.READ_ONLY)
     private BigDecimal totalHT;
+    
+    @Schema(description = "Total de la TVA (calculé automatiquement)", example = "20.00", accessMode = Schema.AccessMode.READ_ONLY)
     private BigDecimal totalTVA;
+    
+    @Schema(description = "Total toutes taxes comprises (calculé automatiquement)", example = "120.00", accessMode = Schema.AccessMode.READ_ONLY)
     private BigDecimal totalTTC;
     
     // Constructeurs

@@ -5,6 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.facture.exercice.dto.FactureDTO;
 import com.facture.exercice.dto.LigneFactureDTO;
 import com.facture.exercice.entity.Client;
+import com.facture.exercice.entity.Facture;
 import com.facture.exercice.service.FactureService;
 import com.facture.exercice.repository.ClientRepository;
 import com.facture.exercice.repository.FactureRepository;
@@ -22,7 +23,7 @@ import static org.mockito.Mockito.*;
  * Tests unitaires pour InvoiceService
  */
 @SpringBootTest
-public class InvoiceServiceTest {
+public class FactureServiceTest {
     
     @Autowired
     private FactureService factureService;
@@ -58,6 +59,13 @@ public class InvoiceServiceTest {
             LocalDate.now(),
             Arrays.asList(ligne)
         );
+
+        // Mock factureRepository.save to return a Facture with an ID
+        Facture mockFacture = new Facture();
+        mockFacture.setId(1L);
+        mockFacture.setClient(clientTest); // <-- Add this line
+        // set other necessary fields if needed
+        when(factureRepository.save(any(Facture.class))).thenReturn(mockFacture);
         
         // Act & Assert
         assertDoesNotThrow(() -> {

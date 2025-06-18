@@ -1,0 +1,14 @@
+com/facture/exercice/entity/Facture.class
+com/facture/exercice/service/ClientService.class
+com/facture/exercice/controller/ClientController.class
+com/facture/exercice/repository/ClientRepository.class
+com/facture/exercice/entity/Client.class
+com/facture/exercice/repository/FactureRepository.class
+com/facture/exercice/dto/LigneFactureDTO.class
+com/facture/exercice/dto/FactureDTO.class
+com/facture/exercice/config/SwaggerConfig.class
+com/facture/exercice/controller/FactureController.class
+com/facture/exercice/dto/ClientDTO.class
+com/facture/exercice/ExerciceApplication.class
+com/facture/exercice/service/FactureService.class
+com/facture/exercice/entity/LigneFacture.class
