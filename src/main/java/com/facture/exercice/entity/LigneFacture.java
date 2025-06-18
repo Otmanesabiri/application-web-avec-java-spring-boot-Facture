@@ -95,6 +95,7 @@ public class LigneFacture {
     public BigDecimal getTauxTVA() { return tauxTVA; }
     public void setTauxTVA(BigDecimal tauxTVA) { this.tauxTVA = tauxTVA; }
     
-    public Facture getInvoice() { return invoice; }
-    public void setInvoice(Facture invoice) { this.invoice = invoice; }
+    public Facture getFacture() { return invoice; }
+    public void setFacture(Facture invoice) { this.invoice = invoice; }
+
 }

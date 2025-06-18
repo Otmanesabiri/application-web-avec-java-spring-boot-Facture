@@ -129,7 +129,7 @@ public class FactureService {
         json.append("  \"lignes\": [\n");
         
         for (int i = 0; i < factureDTO.getLignes().size(); i++) {
-            FactureLineDTO ligne = factureDTO.getLignes().get(i);
+            LigneFactureDTO ligne = factureDTO.getLignes().get(i);
             json.append("    {\n");
             json.append("      \"description\": \"").append(ligne.getDescription()).append("\",\n");
             json.append("      \"quantite\": ").append(ligne.getQuantite()).append(",\n");
@@ -163,7 +163,7 @@ public class FactureService {
         }
         
         // Validation de chaque ligne
-        for (FactureLineDTO ligne : factureDTO.getLignes()) {
+        for (LigneFactureDTO ligne : factureDTO.getLignes()) {
             validerLigneFacture(ligne);
         }
     }
@@ -171,7 +171,7 @@ public class FactureService {
     /**
      * Valide une ligne de facture
      */
-    private void validerLigneFacture(FactureLineDTO ligne) {
+    private void validerLigneFacture(LigneFactureDTO ligne) {
         // Vérification que tous les champs sont remplis
         if (ligne.getDescription() == null || ligne.getDescription().trim().isEmpty()) {
             throw new RuntimeException("La description de la ligne ne peut pas être vide");
@@ -204,7 +204,7 @@ public class FactureService {
         dto.setTotalTVA(facture.getTotalTVA());
         dto.setTotalTTC(facture.getTotalTTC());
         
-        List<FactureLineDTO> lignesDTO = facture.getLignes().stream()
+        List<LigneFactureDTO> lignesDTO = facture.getLignes().stream()
                 .map(this::convertirLigneEnDTO)
                 .collect(Collectors.toList());
         dto.setLignes(lignesDTO);
@@ -213,10 +213,10 @@ public class FactureService {
     }
     
     /**
-     * Convertit une entité FactureLine en FactureLineDTO
+     * Convertit une entité FactureLine en LigneFactureDTO
      */
-    private FactureLineDTO convertirLigneEnDTO(FactureLine ligne) {
-        return new FactureLineDTO(
+    private LigneFactureDTO convertirLigneEnDTO(LigneFacture ligne) {
+        return new LigneFactureDTO(
             ligne.getDescription(),
             ligne.getQuantite(),
             ligne.getPrixUnitaireHT(),
@@ -225,10 +225,10 @@ public class FactureService {
     }
     
     /**
-     * Convertit un FactureLineDTO en entité FactureLine
+     * Convertit un LigneFactureDTO en entité LigneFacture
      */
-    private FactureLine convertirLigneEnEntite(FactureLineDTO dto) {
-        return new FactureLine(
+    private LigneFacture convertirLigneEnEntite(LigneFactureDTO dto) {
+        return new LigneFacture(
             dto.getDescription(),
             dto.getQuantite(),
             dto.getPrixUnitaireHT(),
