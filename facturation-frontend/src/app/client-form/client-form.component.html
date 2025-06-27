@@ -1,0 +1,73 @@
+<mat-card class="client-form-card">
+  <mat-card-header>
+    <mat-card-title>
+      {{ isEditing ? 'Modifier le client' : 'Ajouter un client' }}
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-progress-bar *ngIf="isSaving" mode="indeterminate"></mat-progress-bar>
+
+  <mat-card-content>
+    <form (ngSubmit)="saveClient()" #clientForm="ngForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nom de l'entreprise</mat-label>
+        <input matInput
+               placeholder="Nom de l'entreprise ou du client"
+               [(ngModel)]="client.nom"
+               name="nom"
+               required
+               #nomInput="ngModel">
+        <mat-hint>Entre 2 et 100 caractères</mat-hint>
+        <mat-error *ngIf="nomInput.invalid && nomInput.touched">
+          Le nom est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>SIRET</mat-label>
+        <input matInput
+               placeholder="Numéro SIRET (14 chiffres)"
+               [(ngModel)]="client.siret"
+               name="siret"
+               required
+               pattern="^\d{14}$"
+               #siretInput="ngModel">
+        <mat-hint>Exactement 14 chiffres</mat-hint>
+        <mat-error *ngIf="siretInput.invalid && siretInput.touched">
+          Le SIRET doit contenir exactement 14 chiffres
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput
+               placeholder="contact@exemple.com"
+               [(ngModel)]="client.email"
+               name="email"
+               required
+               type="email"
+               #emailInput="ngModel">
+        <mat-error *ngIf="emailInput.invalid && emailInput.touched">
+          Veuillez entrer une adresse email valide
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button mat-button
+            type="button"
+            (click)="cancel()"
+            [disabled]="isSaving">
+      <mat-icon>cancel</mat-icon>
+      Annuler
+    </button>
+    <button mat-raised-button
+            color="primary"
+            (click)="saveClient()"
+            [disabled]="isSaving">
+      <mat-icon>save</mat-icon>
+      {{ isSaving ? 'Enregistrement...' : (isEditing ? 'Modifier' : 'Créer') }}
+    </button>
+  </mat-card-actions>
+</mat-card>

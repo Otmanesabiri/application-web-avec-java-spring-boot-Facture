@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NotificationComponent } from './shared/notification.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrls: ['./app.scss'],
+  standalone: true,
+  imports: [RouterOutlet, NotificationComponent]
 })
-export class App {
-  protected title = 'facturation-frontend';
+export class AppComponent {
+  title = 'Application de Facturation';
 }

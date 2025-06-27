@@ -1,5 +1,6 @@
 /home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/ExerciceApplication.java
 /home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/config/SwaggerConfig.java
+/home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/config/WebConfig.java
 /home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/controller/ClientController.java
 /home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/controller/FactureController.java
 /home/red/Documents/GitHub/application-web-avec-java-spring-boot-Facture/src/main/java/com/facture/exercice/dto/ClientDTO.java

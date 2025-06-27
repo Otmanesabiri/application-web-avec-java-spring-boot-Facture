@@ -1,0 +1,46 @@
+<div class="client-detail-container">
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <span>Chargement des informations client...</span>
+  </div>
+
+  <mat-card *ngIf="!isLoading && client" class="client-card mat-elevation-z2">
+    <mat-card-header>
+      <mat-card-title>{{ client.nom }}</mat-card-title>
+      <mat-card-subtitle>Client #{{ client.id }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="client-info">
+        <div class="info-group">
+          <div class="label">SIRET:</div>
+          <div class="value">{{ client.siret }}</div>
+        </div>
+
+        <div class="info-group">
+          <div class="label">Email:</div>
+          <div class="value">{{ client.email }}</div>
+        </div>
+
+        <div class="info-group">
+          <div class="label">Date de création:</div>
+          <div class="value">{{ client.dateCreation | date: 'dd/MM/yyyy HH:mm' }}</div>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="editClient()">
+        <mat-icon>edit</mat-icon> MODIFIER
+      </button>
+      <button mat-button color="warn" (click)="deleteClient()">
+        <mat-icon>delete</mat-icon> SUPPRIMER
+      </button>
+      <button mat-stroked-button [routerLink]="['/clients']">
+        <mat-icon>arrow_back</mat-icon> RETOUR
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

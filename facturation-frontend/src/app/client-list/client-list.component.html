@@ -1,0 +1,80 @@
+<div class="client-list-container mat-elevation-z8">
+  <div class="list-header">
+    <h1 class="mat-headline-5">Liste des Clients</h1>
+    <button mat-raised-button color="primary" [routerLink]="['/clients/nouveau']">
+      <mat-icon>add</mat-icon>
+      Ajouter un client
+    </button>
+  </div>
+
+  <div class="loading-shade" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="error-container" *ngIf="error">
+    <mat-icon color="warn">error</mat-icon>
+    <span>{{ error }}</span>
+    <button mat-button color="primary" (click)="loadClients()">
+      <mat-icon>refresh</mat-icon>
+      Réessayer
+    </button>
+  </div>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let client"> {{client.id}} </td>
+      </ng-container>
+
+      <!-- Nom Column -->
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+        <td mat-cell *matCellDef="let client"> {{client.nom}} </td>
+      </ng-container>
+
+      <!-- SIRET Column -->
+      <ng-container matColumnDef="siret">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> SIRET </th>
+        <td mat-cell *matCellDef="let client"> {{client.siret}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let client"> {{client.email}} </td>
+      </ng-container>
+
+      <!-- Date Creation Column -->
+      <ng-container matColumnDef="dateCreation">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de création </th>
+        <td mat-cell *matCellDef="let client"> {{client.dateCreation | date:'dd/MM/yyyy HH:mm'}} </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef aria-label="Actions"> Actions </th>
+        <td mat-cell *matCellDef="let client">
+          <button mat-icon-button color="primary" (click)="$event.stopPropagation(); goToDetail(client)" matTooltip="Voir les détails">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          (click)="goToDetail(row)"
+          class="client-row"></tr>
+    </table>
+
+    <div class="no-data" *ngIf="!isLoading && dataSource.data.length === 0">
+      Aucun client trouvé.
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                   showFirstLastButtons
+                   aria-label="Sélectionner une page de clients">
+    </mat-paginator>
+  </div>
+</div>

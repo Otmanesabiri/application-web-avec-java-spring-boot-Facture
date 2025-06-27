@@ -1,0 +1,109 @@
+.facture-detail-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.facture-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.facture-header-card,
+.facture-lines-card,
+.facture-totals-card {
+  margin-bottom: 16px;
+}
+
+.facture-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.label {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.7);
+  min-width: 80px;
+}
+
+.value {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.facture-lines-table {
+  width: 100%;
+  min-width: 600px;
+}
+
+.totals-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 300px;
+  margin-left: auto;
+}
+
+.total-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.total-ttc {
+  border-top: 2px solid #e0e0e0;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.total-label {
+  font-weight: 500;
+}
+
+.total-value {
+  font-weight: 600;
+}
+
+.facture-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .facture-detail-container {
+    padding: 10px;
+  }
+
+  .facture-actions {
+    flex-direction: column;
+  }
+
+  .totals-grid {
+    max-width: 100%;
+    margin: 0;
+  }
+}

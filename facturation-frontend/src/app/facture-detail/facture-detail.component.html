@@ -1,0 +1,119 @@
+<div class="facture-detail-container">
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <span>Chargement de la facture...</span>
+  </div>
+
+  <div *ngIf="!isLoading && facture" class="facture-content">
+    <!-- En-tête de la facture -->
+    <mat-card class="facture-header-card mat-elevation-z2">
+      <mat-card-header>
+        <mat-card-title>Facture #{{ facture.numero || facture.id }}</mat-card-title>
+        <mat-card-subtitle>{{ facture.date | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="facture-info">
+          <div class="info-group">
+            <div class="label">Client:</div>
+            <div class="value">{{ facture.client?.nom || 'Client #' + facture.clientId }}</div>
+          </div>
+          <div class="info-group" *ngIf="facture.client?.email">
+            <div class="label">Email:</div>
+            <div class="value">{{ facture.client?.email }}</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Lignes de facturation -->
+    <mat-card class="facture-lines-card mat-elevation-z2">
+      <mat-card-header>
+        <mat-card-title>Détail de la facturation</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="table-container">
+          <table mat-table [dataSource]="facture.lignes" class="facture-lines-table">
+            <!-- Description Column -->
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef>Description</th>
+              <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+            </ng-container>
+
+            <!-- Quantité Column -->
+            <ng-container matColumnDef="quantite">
+              <th mat-header-cell *matHeaderCellDef>Quantité</th>
+              <td mat-cell *matCellDef="let element">{{ element.quantite }}</td>
+            </ng-container>
+
+            <!-- Prix unitaire HT Column -->
+            <ng-container matColumnDef="prixUnitaireHT">
+              <th mat-header-cell *matHeaderCellDef>Prix unit. HT</th>
+              <td mat-cell *matCellDef="let element">{{ element.prixUnitaireHT | currency:'EUR':'symbol':'1.2-2' }}</td>
+            </ng-container>
+
+            <!-- Taux TVA Column -->
+            <ng-container matColumnDef="tauxTVA">
+              <th mat-header-cell *matHeaderCellDef>TVA (%)</th>
+              <td mat-cell *matCellDef="let element">{{ element.tauxTVA }}%</td>
+            </ng-container>
+
+            <!-- Montant HT Column -->
+            <ng-container matColumnDef="montantHT">
+              <th mat-header-cell *matHeaderCellDef>Montant HT</th>
+              <td mat-cell *matCellDef="let element">{{ calculateLineTotal(element) | currency:'EUR':'symbol':'1.2-2' }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Totaux -->
+    <mat-card class="facture-totals-card mat-elevation-z2">
+      <mat-card-header>
+        <mat-card-title>Récapitulatif</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="totals-grid">
+          <div class="total-item">
+            <span class="total-label">Total HT:</span>
+            <span class="total-value">{{ (facture.totalHT || facture.montantTotal) | currency:'EUR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-item" *ngIf="facture.totalTVA">
+            <span class="total-label">Total TVA:</span>
+            <span class="total-value">{{ facture.totalTVA | currency:'EUR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-item total-ttc">
+            <span class="total-label">Total TTC:</span>
+            <span class="total-value">{{ (facture.totalTTC || facture.montantTotal) | currency:'EUR':'symbol':'1.2-2' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Actions -->
+    <div class="facture-actions">
+      <button mat-raised-button color="primary" (click)="editFacture()">
+        <mat-icon>edit</mat-icon>
+        Modifier
+      </button>
+      <button mat-raised-button color="accent" (click)="exportFacture()">
+        <mat-icon>download</mat-icon>
+        Exporter JSON
+      </button>
+      <button mat-raised-button color="warn" (click)="deleteFacture()">
+        <mat-icon>delete</mat-icon>
+        Supprimer
+      </button>
+      <button mat-stroked-button [routerLink]="['/factures']">
+        <mat-icon>arrow_back</mat-icon>
+        Retour à la liste
+      </button>
+    </div>
+  </div>
+</div>
